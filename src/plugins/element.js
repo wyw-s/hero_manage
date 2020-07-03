@@ -7,7 +7,9 @@ import {
   Menu,
   Submenu,
   MenuItemGroup,
-  MenuItem
+  MenuItem,
+  RadioGroup,
+  RadioButton
 } from 'element-ui'
 
 Vue.use(Container)
@@ -18,3 +20,5 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
