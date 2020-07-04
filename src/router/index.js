@@ -10,7 +10,7 @@ const routes = [
     redirect: '/heroList',
     children: [
       {
-        path: 'heroList',
+        path: '/heroList',
         name: 'heroList',
         component: () => import('@/views/heroManage')
       }

@@ -16,7 +16,12 @@ import {
   Card,
   Table,
   TableColumn,
-  Button
+  Button,
+  Dialog,
+  Form,
+  FormItem,
+  Input,
+  Upload
 } from 'element-ui'
 
 Vue.use(Container)
@@ -36,3 +41,8 @@ Vue.use(Card)
 Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Button)
+Vue.use(Dialog)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Upload)
