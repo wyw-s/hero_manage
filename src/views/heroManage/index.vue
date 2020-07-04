@@ -38,6 +38,16 @@ export default {
         { prop: 'operate', label: '操作', width: '180', align: 'center' }
       ]
     }
+  },
+  created () {
+    this.initData()
+  },
+  methods: {
+    initData () {
+      this.$store.dispatch('getHeroList').then(response => {
+        console.log(response)
+      })
+    }
   }
 }
 </script>
