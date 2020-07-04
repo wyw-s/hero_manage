@@ -6,7 +6,15 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: () => import('@/views/layout')
+    component: () => import('@/views/layout'),
+    redirect: '/heroList',
+    children: [
+      {
+        path: 'heroList',
+        name: 'heroList',
+        component: () => import('@/views/heroManage')
+      }
+    ]
   }
 ]
 

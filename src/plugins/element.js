@@ -9,7 +9,10 @@ import {
   MenuItemGroup,
   MenuItem,
   RadioGroup,
-  RadioButton
+  RadioButton,
+  Breadcrumb,
+  BreadcrumbItem,
+  Tag
 } from 'element-ui'
 
 Vue.use(Container)
@@ -22,3 +25,6 @@ Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Tag)
