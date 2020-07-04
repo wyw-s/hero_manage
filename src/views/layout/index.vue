@@ -39,6 +39,9 @@ export default {
     .el-container {
       display: flex;
       flex-direction: column;
+      .el-main {
+        height: 100vh;
+      }
     }
   }
 </style>

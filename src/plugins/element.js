@@ -12,7 +12,11 @@ import {
   RadioButton,
   Breadcrumb,
   BreadcrumbItem,
-  Tag
+  Tag,
+  Card,
+  Table,
+  TableColumn,
+  Button
 } from 'element-ui'
 
 Vue.use(Container)
@@ -28,3 +32,7 @@ Vue.use(RadioButton)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
 Vue.use(Tag)
+Vue.use(Card)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Button)

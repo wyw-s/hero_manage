@@ -39,7 +39,7 @@ export default {
   .header-tag {
     display: flex;
     align-items: center;
-    height: 34px;
+    min-height: 34px;
     padding-left: 22px;
     border-bottom: 0.5px solid #DDDDDD;
     .el-tag {
