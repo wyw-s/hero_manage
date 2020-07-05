@@ -4,7 +4,7 @@
       <el-button
         type="primary"
         size="small"
-        @click="dialogFormVisible = true"
+        @click="onAddHero"
       >新增英雄</el-button>
     </div>
 
@@ -25,7 +25,7 @@
           <img
             v-if="item.prop === 'images'"
             class="images"
-            :src="scope.row[item.prop]"
+            :src="localhostURL + scope.row[item.prop]"
             alt=""
           >
           <div v-else>{{ scope.row[item.prop] }}</div>
@@ -55,12 +55,13 @@
         <div class="uploadImg">
           <div class="poster">
             <i class="el-icon-plus" @click="onOpenFile" v-if="isShowUploadBtn"></i>
-            <img src="" alt="" v-else>
+            <img :src="temporaryURL" alt="" v-else>
             <input
               type="file"
               ref="uploadImg"
               style="display: none"
               name="images"
+              @change="onUploadImg"
             />
           </div>
           <div class="intro">
@@ -107,16 +108,19 @@ export default {
         { prop: 'images', label: '图片', width: '200', align: 'center' },
         { prop: 'nickName', label: '昵称', width: '200', align: '' },
         { prop: 'userName', label: '用户名', width: '', align: '' },
-        { prop: 'date', label: '日期', width: '200', align: '' }
+        { prop: 'date', label: '日期', width: '200', align: '' },
+        { prop: 'intro', label: '简介', width: '200', align: '' }
       ],
       form: {
         intro: '',
         nickName: '',
-        userName: ''
+        userName: '管理员'
       },
       formLabelWidth: '120px',
       dialogFormVisible: false,
-      isShowUploadBtn: true
+      isShowUploadBtn: true,
+      localhostURL: 'http://localhost:3000/',
+      temporaryURL: ''
     }
   },
   created () {
@@ -130,8 +134,19 @@ export default {
         }
       })
     },
+    onAddHero () {
+      this.temporaryURL = ''
+      this.isShowUploadBtn = true
+      this.dialogFormVisible = true
+    },
     onOpenFile () {
       this.$refs.uploadImg.click()
+    },
+    onUploadImg (event) {
+      const file = event.target.files[0]
+      const url = URL.createObjectURL(file)
+      this.temporaryURL = url
+      this.isShowUploadBtn = false
     },
     onSubmit () {
       const formData = new FormData(this.$refs.form.$el)
@@ -161,6 +176,7 @@ export default {
   }
   .images {
     width: 100px;
+    height: 60px;
     vertical-align: middle;
   }
   .uploadImg {
@@ -189,6 +205,7 @@ export default {
       img {
         width: 100px;
         height: 100px;
+        border-radius: 10px;
       }
     }
     .intro {

@@ -10,7 +10,7 @@
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <span>退出登录</span>
+      <span class="logOut">退出登录</span>
     </div>
   </el-header>
 </template>
@@ -54,6 +54,9 @@ export default {
           cursor: pointer;
           margin-right: 20px;
         }
+      }
+      .logOut {
+        cursor: pointer
       }
     }
   }
