@@ -21,7 +21,8 @@ import {
   Form,
   FormItem,
   Input,
-  Upload
+  Upload,
+  Message
 } from 'element-ui'
 
 Vue.use(Container)
@@ -46,3 +47,4 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Upload)
+Vue.prototype.$message = Message

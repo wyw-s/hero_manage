@@ -7,7 +7,7 @@ import resquest from '../axios.js'
 export function getHeroList () {
   return resquest({
     url: '/hero/getlist',
-    methods: 'GET'
+    method: 'GET'
   })
 }
 
@@ -15,7 +15,10 @@ export function getHeroList () {
 export function postAddHero (data) {
   return resquest({
     url: '/hero/add',
-    methods: 'POST',
-    data
+    method: 'POST',
+    data,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
   })
 }

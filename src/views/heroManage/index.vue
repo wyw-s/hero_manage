@@ -4,7 +4,7 @@
       <el-button
         type="primary"
         size="small"
-        @click="onAddHero"
+        @click="dialogFormVisible = true"
       >新增英雄</el-button>
     </div>
 
@@ -20,14 +20,27 @@
         :label="item.label"
         :width="item.width"
         :align="item.align"
-        >
-          <template v-if="item.prop === 'images'">
-            <img class="images" src="@/assets/images/1526091539813.jpg" alt="">
-          </template>
-          <template v-if="item.prop === 'operate'">
-            <el-button type="danger" size="small" icon="el-icon-delete"></el-button>
-          </template>
-        </el-table-column>
+      >
+        <template slot-scope="scope">
+          <img
+            v-if="item.prop === 'images'"
+            class="images"
+            :src="scope.row[item.prop]"
+            alt=""
+          >
+          <div v-else>{{ scope.row[item.prop] }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="操作"
+        width="180px"
+        align="center"
+      >
+        <template>
+          <el-button type="danger" size="small" icon="el-icon-delete"></el-button>
+        </template>
+      </el-table-column>
+
     </el-table>
 
     <!--新增英雄弹框-->
@@ -38,33 +51,47 @@
       center
       width="40%"
     >
-      <div class="uploadImg">
-        <div class="poster">
-          <i class="el-icon-plus" @click="onOpenFile" v-if="isShowUploadBtn"></i>
-          <img src="" alt="" v-else>
-          <input type="file" ref="uploadImg" style="display: none"/>
+      <el-form :model="form" ref="form">
+        <div class="uploadImg">
+          <div class="poster">
+            <i class="el-icon-plus" @click="onOpenFile" v-if="isShowUploadBtn"></i>
+            <img src="" alt="" v-else>
+            <input
+              type="file"
+              ref="uploadImg"
+              style="display: none"
+              name="images"
+            />
+          </div>
+          <div class="intro">
+            <el-input
+              type="textarea"
+              placeholder="请输入简介内容"
+              v-model="form.intro"
+              resize="none"
+              name="intro"
+            >
+            </el-input>
+          </div>
         </div>
-        <div class="intro">
-          <el-input
-            type="textarea"
-            placeholder="请输入简介内容"
-            v-model="form.textarea"
-            resize="none"
-          >
-          </el-input>
-        </div>
-      </div>
-      <el-form :model="form">
         <el-form-item label="昵称" :label-width="formLabelWidth">
-          <el-input v-model="form.nickName" autocomplete="off"></el-input>
+          <el-input
+            v-model="form.nickName"
+            autocomplete="off"
+            name="nickName"
+          ></el-input>
         </el-form-item>
         <el-form-item label="用户名" :label-width="formLabelWidth">
-          <el-input v-model="form.userName" autocomplete="off"></el-input>
+          <el-input
+            v-model="form.userName"
+            autocomplete="off"
+            name="userName"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="onSubmit">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -80,13 +107,12 @@ export default {
         { prop: 'images', label: '图片', width: '200', align: 'center' },
         { prop: 'nickName', label: '昵称', width: '200', align: '' },
         { prop: 'userName', label: '用户名', width: '', align: '' },
-        { prop: 'date', label: '日期', width: '200', align: '' },
-        { prop: 'operate', label: '操作', width: '180', align: 'center' }
+        { prop: 'date', label: '日期', width: '200', align: '' }
       ],
       form: {
+        intro: '',
         nickName: '',
-        userName: '',
-        textarea: ''
+        userName: ''
       },
       formLabelWidth: '120px',
       dialogFormVisible: false,
@@ -99,22 +125,26 @@ export default {
   methods: {
     initData () {
       this.$store.dispatch('getHeroList').then(response => {
-        console.log(response)
+        if (response.data.code === 200) {
+          this.heroListData = response.data.heroList
+        }
       })
-    },
-    onAddHero () {
-      this.dialogFormVisible = true
-      // const params = {
-      //   images: '',
-      //   nickName: '',
-      //   userName: ''
-      // }
-      // this.$store.dispatch('postAddHero', params).then(response => {
-      //   console.log(response)
-      // })
     },
     onOpenFile () {
       this.$refs.uploadImg.click()
+    },
+    onSubmit () {
+      const formData = new FormData(this.$refs.form.$el)
+      this.$store.dispatch('postAddHero', formData).then(response => {
+        if (response.data.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '新增成功'
+          })
+          this.initData()
+        }
+      })
+      this.dialogFormVisible = false
     }
   }
 }
