@@ -25,7 +25,7 @@
           <img
             v-if="item.prop === 'images'"
             class="images"
-            :src="localhostURL + scope.row[item.prop]"
+            :src="scope.row[item.prop]"
             alt=""
           >
           <div v-else>{{ scope.row[item.prop] }}</div>
