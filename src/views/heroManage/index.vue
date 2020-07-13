@@ -49,7 +49,7 @@
       custom-class="addHeroStyle"
       :visible.sync="dialogFormVisible"
       center
-      width="40%"
+      width="500px"
     >
       <el-form :model="form" ref="form">
         <div class="uploadImg">
