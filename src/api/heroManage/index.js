@@ -22,3 +22,12 @@ export function postAddHero (data) {
     }
   })
 }
+
+// 删除英雄；
+export function postDeleteHero (data) {
+  return resquest({
+    url: '/hero/delete',
+    method: 'DELETE',
+    data
+  })
+}

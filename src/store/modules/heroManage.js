@@ -3,7 +3,8 @@
  */
 import {
   getHeroList,
-  postAddHero
+  postAddHero,
+  postDeleteHero
 } from '@/api/heroManage/index.js'
 const heroManage = {
   actions: {
@@ -21,6 +22,16 @@ const heroManage = {
     postAddHero ({ commit }, params) {
       return new Promise((resolve, reject) => {
         postAddHero(params).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    // 删除英雄；
+    postDeleteHero ({ commit }, params) {
+      return new Promise((resolve, reject) => {
+        postDeleteHero(params).then(response => {
           resolve(response)
         }).catch(error => {
           reject(error)

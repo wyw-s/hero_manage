@@ -36,8 +36,13 @@
         width="180px"
         align="center"
       >
-        <template>
-          <el-button type="danger" size="small" icon="el-icon-delete"></el-button>
+        <template slot-scope="scope">
+          <el-button
+            type="danger"
+            size="small"
+            icon="el-icon-delete"
+            @click="onDelete(scope.row)"
+          ></el-button>
         </template>
       </el-table-column>
 
@@ -119,7 +124,6 @@ export default {
       formLabelWidth: '120px',
       dialogFormVisible: false,
       isShowUploadBtn: true,
-      localhostURL: 'http://localhost:3000/',
       temporaryURL: ''
     }
   },
@@ -134,8 +138,15 @@ export default {
         }
       })
     },
+
+    // 添加英雄
     onAddHero () {
       this.temporaryURL = ''
+      this.form = {
+        intro: '',
+        nickName: '',
+        userName: '管理员'
+      }
       this.isShowUploadBtn = true
       this.dialogFormVisible = true
     },
@@ -148,6 +159,8 @@ export default {
       this.temporaryURL = url
       this.isShowUploadBtn = false
     },
+
+    // 新增英雄
     onSubmit () {
       const formData = new FormData(this.$refs.form.$el)
       this.$store.dispatch('postAddHero', formData).then(response => {
@@ -160,6 +173,19 @@ export default {
         }
       })
       this.dialogFormVisible = false
+    },
+
+    // 删除英雄
+    onDelete (val) {
+      this.$store.dispatch('postDeleteHero', { id: val.Id }).then(res => {
+        if (res.data.code === 200) {
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+          this.initData()
+        }
+      })
     }
   }
 }
