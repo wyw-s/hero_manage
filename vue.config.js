@@ -12,7 +12,7 @@ module.exports = {
   // css相关配置
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
-    extract: true,
+    extract: process.env.NODE_ENV === 'production',
     // 开启 CSS source maps?
     sourceMap: false
   },
@@ -27,6 +27,7 @@ module.exports = {
     host: '0.0.0.0', // 允许以 ip 地址访问本机
     port: 8085,
     open: true,
+    hot: true, // 热更新
     proxy: {
       '/hero': {
         target: 'http://localhost:3000',
