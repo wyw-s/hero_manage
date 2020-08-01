@@ -1,5 +1,5 @@
 <template>
-  <div>登录</div>
+  <div id="login">登录</div>
 </template>
 
 <script>
@@ -9,5 +9,9 @@ export default {
 </script>
 
 <style scoped>
-
+#login {
+  width: 100%;
+  height: 100%;
+  background-color: chartreuse;
+}
 </style>
