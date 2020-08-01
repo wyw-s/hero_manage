@@ -22,7 +22,8 @@ import {
   FormItem,
   Input,
   Upload,
-  Message
+  Message,
+  Checkbox
 } from 'element-ui'
 
 Vue.use(Container)
@@ -47,4 +48,5 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
 Vue.use(Upload)
+Vue.use(Checkbox)
 Vue.prototype.$message = Message

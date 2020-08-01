@@ -1,16 +1,26 @@
 <template>
   <div id="login">
     <el-card class="box-card login-card">
+      <p>皮肤商城后台管理系统</p>
       <el-input
         placeholder="请输入账户"
         prefix-icon="el-icon-user-solid"
-        v-model="input2">
+        v-model="account">
       </el-input>
       <el-input
         placeholder="请输入密码"
         prefix-icon="el-icon-s-goods"
-        v-model="input2">
+        v-model="password">
       </el-input>
+      <div>
+        <el-input
+          placeholder="请输入验证码"
+          prefix-icon="el-icon-chat-dot-square"
+          v-model="identify">
+        </el-input>
+      </div>
+      <el-checkbox v-model="rememb">记住密码</el-checkbox>
+      <el-button type="primary">登 录</el-button>
     </el-card>
   </div>
 </template>
@@ -20,7 +30,10 @@ export default {
   name: 'login',
   data () {
     return {
-      input2: ''
+      account: '',
+      password: '',
+      identify: '',
+      rememb: false
     }
   }
 }
@@ -33,8 +46,23 @@ export default {
   background-image: url("../../assets/images/luna.jpg");
   .login-card {
     width: 400px;
-    height: 250px;
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    p {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 0;
+    }
+    .el-input {
+      margin-bottom: 16px;
+    }
+    .el-button {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+    }
   }
 }
 </style>
