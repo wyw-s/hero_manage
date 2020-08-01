@@ -16,6 +16,13 @@ module.exports = {
     // 开启 CSS source maps?
     sourceMap: false
   },
+  chainWebpack: config => {
+    config.plugin('html')
+      .tap(args => {
+        args[0].title = '后台管理'
+        return args
+      })
+  },
   devServer: {
     host: '0.0.0.0', // 允许以 ip 地址访问本机
     port: 8085,
