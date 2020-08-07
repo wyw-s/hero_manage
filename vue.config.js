@@ -34,6 +34,12 @@ module.exports = {
         pathRewrite: {
           '^/hero': '/hero'
         }
+      },
+      '/user': {
+        target: 'http://localhost:3000',
+        pathRewrite: {
+          '^/user': '/user'
+        }
       }
     }
   }

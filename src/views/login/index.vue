@@ -12,12 +12,13 @@
         prefix-icon="el-icon-s-goods"
         v-model="password">
       </el-input>
-      <div>
+      <div class="captcha">
         <el-input
           placeholder="请输入验证码"
           prefix-icon="el-icon-chat-dot-square"
           v-model="identify">
         </el-input>
+        <img @click="onCaptcha" :src="captchaUrl" alt="">
       </div>
       <el-checkbox v-model="rememb">记住密码</el-checkbox>
       <el-button type="primary">登 录</el-button>
@@ -33,7 +34,16 @@ export default {
       account: '',
       password: '',
       identify: '',
-      rememb: false
+      rememb: false,
+      captchaUrl: ''
+    }
+  },
+  created () {
+    this.onCaptcha()
+  },
+  methods: {
+    onCaptcha () {
+      this.captchaUrl = `/user/captcha?${Math.random()}`
     }
   }
 }
@@ -62,6 +72,18 @@ export default {
       display: block;
       width: 100%;
       margin-top: 16px;
+    }
+    .captcha {
+      .el-input {
+        width: 200px;
+      }
+      img {
+        width: 135px;
+        height: 40px;
+        margin-left: 15px;
+        cursor: pointer;
+        vertical-align: middle;
+      }
     }
   }
 }
