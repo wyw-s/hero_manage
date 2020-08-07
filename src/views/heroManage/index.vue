@@ -135,9 +135,9 @@ export default {
   },
   methods: {
     initData () {
-      this.$store.dispatch('getHeroList').then(response => {
-        if (response.data.code === 200) {
-          this.heroListData = response.data.heroList
+      this.$store.dispatch('getHeroList').then(res => {
+        if (res.code === 200) {
+          this.heroListData = res.heroList
         }
       })
     },
@@ -222,10 +222,7 @@ export default {
           // }, 'image/jpeg', 0.92)
         }
       } else {
-        this.$message({
-          type: 'warning',
-          message: '请上传图片'
-        })
+        this.$tooltip('请上传图片', 'warning')
       }
     },
 
@@ -251,10 +248,7 @@ export default {
       formData.append('userName', this.form.userName)
       this.$store.dispatch('postAddHero', formData).then(response => {
         if (response.data.code === 200) {
-          this.$message({
-            type: 'success',
-            message: '新增成功'
-          })
+          this.$tooltip('新增成功')
           this.initData()
         }
       })
@@ -265,10 +259,7 @@ export default {
     onDelete (val) {
       this.$store.dispatch('postDeleteHero', { id: val.Id }).then(res => {
         if (res.data.code === 200) {
-          this.$message({
-            message: '删除成功',
-            type: 'success'
-          })
+          this.$tooltip('删除成功')
           this.initData()
         }
       })

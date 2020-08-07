@@ -19,7 +19,7 @@ const login = {
     },
 
     // 用户登录;
-    userLogin (params) {
+    userLogin ({ commit }, params) {
       return new Promise((resolve, reject) => {
         userLogin(params).then(response => {
           resolve(response)

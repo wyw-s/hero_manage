@@ -8,6 +8,7 @@
         v-model="account">
       </el-input>
       <el-input
+        show-password
         placeholder="请输入密码"
         prefix-icon="el-icon-s-goods"
         v-model="password">
@@ -16,12 +17,12 @@
         <el-input
           placeholder="请输入验证码"
           prefix-icon="el-icon-chat-dot-square"
-          v-model="identify">
+          v-model="captcha">
         </el-input>
         <img @click="onCaptcha" :src="captchaUrl" alt="">
       </div>
       <el-checkbox v-model="rememb">记住密码</el-checkbox>
-      <el-button type="primary">登 录</el-button>
+      <el-button @click="onLogin" type="primary">登 录</el-button>
     </el-card>
   </div>
 </template>
@@ -33,7 +34,7 @@ export default {
     return {
       account: '',
       password: '',
-      identify: '',
+      captcha: '',
       rememb: false,
       captchaUrl: ''
     }
@@ -42,8 +43,22 @@ export default {
     this.onCaptcha()
   },
   methods: {
+    // 获取验证码；
     onCaptcha () {
       this.captchaUrl = `/user/captcha?${Math.random()}`
+    },
+
+    // 登录：
+    onLogin () {
+      this.$store.dispatch('userLogin', {
+        username: this.account,
+        password: this.password,
+        captcha: this.captcha
+      }).then(res => {
+        if (res.code === 200) {
+          this.$tooltip(res.message)
+        }
+      })
     }
   }
 }
