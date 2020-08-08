@@ -246,8 +246,8 @@ export default {
       formData.append('intro', this.form.intro)
       formData.append('nickName', this.form.nickName)
       formData.append('userName', this.form.userName)
-      this.$store.dispatch('postAddHero', formData).then(response => {
-        if (response.data.code === 200) {
+      this.$store.dispatch('postAddHero', formData).then(res => {
+        if (res.code === 200) {
           this.$tooltip('新增成功')
           this.initData()
         }
@@ -258,15 +258,11 @@ export default {
     // 删除英雄
     onDelete (val) {
       this.$store.dispatch('postDeleteHero', { id: val.Id }).then(res => {
-        if (res.data.code === 200) {
+        if (res.code === 200) {
           this.$tooltip('删除成功')
           this.initData()
         }
       })
-    },
-
-    onClick (e) {
-      console.log('====', e)
     }
   }
 }

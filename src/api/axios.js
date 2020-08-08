@@ -2,8 +2,7 @@ import axios from 'axios'
 import { tooltip } from '@/utils/globalMethods'
 
 const Axios = axios.create({
-  // 解决线上的请求404问题；
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://47.114.139.71:3000' : '',
+  baseURL: process.env.VUE_APP_BASE_URL,
   // 注意此处的 header 不加 s；
   header: {
     'Content-Type': 'application/json, charset=utf-8'

@@ -45,7 +45,7 @@ export default {
   methods: {
     // 获取验证码；
     onCaptcha () {
-      this.captchaUrl = `/user/captcha?${Math.random()}`
+      this.captchaUrl = `${process.env.VUE_APP_BASE_URL}/user/captcha?${Math.random()}`
     },
 
     // 登录：

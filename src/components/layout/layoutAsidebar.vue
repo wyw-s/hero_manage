@@ -65,7 +65,7 @@ export default {
       height: 100%;
       display: inline-block;
       transition: all 300ms;
-      background: url("../../../assets/images/logo.png") no-repeat;
+      background: url("../../assets/images/logo.png") no-repeat;
       background-size: 200px 96%;
       background-position-x: 4px;
     }

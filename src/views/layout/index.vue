@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import layoutHeader from './components/layoutHeader'
-import layoutAsidebar from './components/layoutAsidebar'
-import layoutTags from './components/layoutTags'
+import layoutHeader from '@/components/layout/layoutHeader'
+import layoutAsidebar from '@/components/layout/layoutAsidebar'
+import layoutTags from '@/components/layout/layoutTags'
 export default {
   name: 'layout',
   components: {
