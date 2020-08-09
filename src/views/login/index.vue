@@ -56,6 +56,7 @@ export default {
         captcha: this.captcha
       }).then(res => {
         if (res.code === 200) {
+          this.$setLocalStorage('accessToken', res.data.accessToken)
           this.$tooltip(res.message)
         }
       })
