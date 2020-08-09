@@ -50,6 +50,16 @@ export default {
 
     // 登录：
     onLogin () {
+      if (!this.account) {
+        this.$tooltip('请填写用户名', 'warning')
+        return
+      } else if (!this.password) {
+        this.$tooltip('请填写输入密码', 'warning')
+        return
+      } else if (!this.captcha) {
+        this.$tooltip('请填写输入验证码', 'warning')
+        return
+      }
       this.$store.dispatch('userLogin', {
         username: this.account,
         password: this.password,

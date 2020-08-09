@@ -80,4 +80,12 @@ export default {
     width: 200px;
     min-height: calc(100vh - 50px);
   }
+  .el-submenu {
+    .el-menu-item {
+      background: #000000 !important;
+    }
+  }
+  .el-menu-item.is-active {
+    background: #ff6a001f !important;
+  }
 </style>
