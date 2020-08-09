@@ -81,19 +81,24 @@ export default {
   width: 100vw;
   height: 100vh;
   background-image: url("../../assets/images/luna.jpg");
-  .login-card {
+  /deep/.login-card {
     width: 400px;
     position: absolute;
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
+    background: transparent;
     p {
       text-align: center;
       font-size: 18px;
       margin-top: 0;
+      color: red;
     }
     .el-input {
       margin-bottom: 16px;
+      .el-input__inner {
+        background: transparent;
+      }
     }
     .el-button {
       display: block;
