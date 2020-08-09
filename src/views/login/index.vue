@@ -32,8 +32,8 @@ export default {
   name: 'login',
   data () {
     return {
-      account: '',
-      password: '',
+      account: '123456',
+      password: '123456',
       captcha: '',
       rememb: false,
       captchaUrl: ''
@@ -66,8 +66,9 @@ export default {
         captcha: this.captcha
       }).then(res => {
         if (res.code === 200) {
-          this.$setLocalStorage('accessToken', res.data.accessToken)
           this.$tooltip(res.message)
+          this.$setLocalStorage('SUCCESS_TOKEN', res.data.SUCCESS_TOKEN)
+          this.$router.push('/')
         }
       })
     }

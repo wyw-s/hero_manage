@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { getLocalStorage } from '@/utils/globalMethods'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,12 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+// 全局路由拦截器
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'login' && !getLocalStorage('SUCCESS_TOKEN')) next({ name: 'login' })
+  else next()
 })
 
 export default router

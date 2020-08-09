@@ -14,7 +14,7 @@ Axios.interceptors.request.use(function (config) {
   const regExp = /\/user\//
   if (!regExp.test(config.url)) {
     // 添加请求头
-    config.headers.Authorization = getLocalStorage('accessToken')
+    config.headers.Authorization = getLocalStorage('SUCCESS_TOKEN')
   }
   return config
 }, function (error) {
