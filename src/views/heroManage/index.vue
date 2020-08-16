@@ -172,34 +172,40 @@ export default {
         img.onload = function () {
           // 获取图片实际宽高
           const { width: originWidth, height: originHeight } = img
+
+          // 如果只是想压缩图片质量而不是大小，那么可以不用限制宽高
           // 最大尺寸限制，设置宽高来实现图片压缩程度
-          const maxWidth = 100
-          const maxHeight = 60
+          // const maxWidth = 100
+          // const maxHeight = 60
           // 目标尺寸
-          let targetWidth = originWidth
-          let targetHeight = originHeight
+          // let targetWidth = originWidth
+          // let targetHeight = originHeight
           // 图片尺寸超过100x60的限制
-          if (originWidth > maxWidth || originHeight > maxHeight) {
-            if (originWidth / originHeight > maxWidth / maxHeight) {
-              // 按照宽度限定尺寸
-              targetWidth = maxWidth
-              targetHeight = Math.round(maxWidth * (originHeight / originWidth))
-            } else {
-              // 按照高度限定尺寸
-              targetHeight = maxHeight
-              targetWidth = Math.round(maxHeight * (originWidth / originHeight))
-            }
-          }
+          // if (originWidth > maxWidth || originHeight > maxHeight) {
+          //   if (originWidth / originHeight > maxWidth / maxHeight) {
+          //     // 按照宽度限定尺寸
+          //     targetWidth = maxWidth
+          //     targetHeight = Math.round(maxWidth * (originHeight / originWidth))
+          //   } else {
+          //     // 按照高度限定尺寸
+          //     targetHeight = maxHeight
+          //     targetWidth = Math.round(maxHeight * (originWidth / originHeight))
+          //   }
+          // }
+
           // 3、canvas对图片进行缩放
           // 缩放图片需要的canvas
           var canvas = document.createElement('canvas')
           var context = canvas.getContext('2d')
-          canvas.width = targetWidth
-          canvas.height = targetHeight
+          // canvas.width = targetWidth
+          // canvas.height = targetHeight
+          // 保持图片原有宽高。
+          canvas.width = originWidth
+          canvas.height = originHeight
           // 清除画布
-          context.clearRect(0, 0, targetWidth, targetHeight)
-          // 图片压缩
-          context.drawImage(img, 0, 0, targetWidth, targetHeight)
+          context.clearRect(0, 0, originWidth, originHeight)
+          // 图片压缩(重新绘制画布)
+          context.drawImage(img, 0, 0, originWidth, originHeight)
           /* 第一个参数是创建的img对象；第二个参数是左上角坐标，后面两个是画布区域宽高 */
           // 压缩后的图片base64
           /* canvas.toDataURL(mimeType, qualityArgument)
@@ -207,7 +213,7 @@ export default {
            *  qualityArgument表示导出的图片质量，只要导出为jpg和webp格式的时候此参数才有效果，默认值是0.92
            */
           // 4、base64 格式(处理方式一)
-          this_.newUrlBase64 = canvas.toDataURL('image/jpeg', 0.92)
+          this_.newUrlBase64 = canvas.toDataURL('image/jpeg', 0.7)
           this_.fileName = file.name
           this_.temporaryURL = URL.createObjectURL(this_.dataURLtoFile(this_.newUrlBase64, file.name))
           this_.isShowUploadBtn = false
