@@ -25,8 +25,8 @@
           <el-image
             v-if="item.prop === 'images'"
             style="width: 80px; height: 80px"
-            :src="scope.row[item.prop]"
-            :preview-src-list="[scope.row[item.prop]]">
+            :src="baseUrl + scope.row[item.prop]"
+            :preview-src-list="[baseUrl + scope.row[item.prop]]">
           </el-image>
           <div v-else>{{ scope.row[item.prop] }}</div>
         </template>
@@ -127,7 +127,8 @@ export default {
       isShowUploadBtn: true,
       temporaryURL: '',
       newUrlBase64: '',
-      fileName: ''
+      fileName: '',
+      baseUrl: `${process.env.VUE_APP_BASE_URL}/`
     }
   },
   created () {
@@ -247,6 +248,10 @@ export default {
 
     // 新增英雄
     onSubmit () {
+      if (!this.newUrlBase64) {
+        this.$tooltip('请上传图片', 'warning')
+        return
+      }
       const formData = new FormData()
       formData.append('images', this.dataURLtoFile(this.newUrlBase64, this.fileName))
       formData.append('intro', this.form.intro)
@@ -263,7 +268,10 @@ export default {
 
     // 删除英雄
     onDelete (val) {
-      this.$store.dispatch('postDeleteHero', { id: val.Id }).then(res => {
+      this.$store.dispatch('postDeleteHero', {
+        id: val.Id,
+        images: val.images
+      }).then(res => {
         if (res.code === 200) {
           this.$tooltip('删除成功')
           this.initData()
