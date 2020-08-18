@@ -7,22 +7,32 @@
       class="el-menu-vertical-demo"
       @open="onSideOpen"
       @close="onSideClose"
+      @select="onSelect"
       :collapse="unfoldOrClose"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      default-active="2-1"
     >
-      <el-menu-item index="1">
-        <i class="el-icon-menu"></i>
-        <span slot="title">首页</span>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">英雄管理</span>
-        </template>
-        <el-menu-item index="2-1" style="padding-left: 49px">英雄列表</el-menu-item>
-      </el-submenu>
+      <template v-for="item in menuArr">
+        <el-menu-item v-if="!item.children" :index="item.id" :key="item.id">
+          <i class="el-icon-menu"></i>
+          <span slot="title">{{ item.menuName }}</span>
+        </el-menu-item>
+        <el-submenu v-else :index="item.id" :key="item.id">
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span slot="title">{{ item.menuName }}</span>
+          </template>
+          <el-menu-item
+            v-for="twoitem in item.children"
+            :key="twoitem.id"
+            :index="twoitem.id"
+            style="padding-left: 49px">
+            {{ twoitem.menuName }}
+          </el-menu-item>
+        </el-submenu>
+      </template>
     </el-menu>
   </el-aside>
 </template>
@@ -30,6 +40,22 @@
 <script>
 export default {
   name: 'asidebar',
+  data () {
+    return {
+      menuArr: [
+        { id: '1', menuName: '首页', url: '', children: null },
+        {
+          id: '2',
+          menuName: '英雄管理',
+          children: [
+            { id: '2-1', menuName: '英雄列表', url: 'heroList', children: null },
+            { id: '2-2', menuName: '新品上市', url: '', children: null }
+          ]
+        },
+        { id: '3', menuName: '数据管理', url: '', children: null }
+      ]
+    }
+  },
   computed: {
     unfoldOrClose: function () {
       return this.$store.state.layout.unfoldOrClose
@@ -45,6 +71,24 @@ export default {
     }
   },
   methods: {
+    onSelect (index) {
+      let URL = ''
+      this.menuArr.forEach(item => {
+        if (item.id === index) {
+          URL = item.url
+          return
+        }
+        if (item.children) {
+          for (let i = 0; i < item.children.length; i++) {
+            if (item.children[i].id === index) {
+              URL = item.children[i].url
+              return
+            }
+          }
+        }
+      })
+      this.$router.push({ name: URL })
+    },
     onSideOpen (key, keyPath) {
       console.log(key, keyPath)
     },

@@ -4,6 +4,12 @@ import { getLocalStorage } from '@/utils/globalMethods'
 
 Vue.use(VueRouter)
 
+// 解决ElementUI导航栏中的重复点菜单报错问题(错误依然存在只是没有打印在控制台)
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const routes = [
   {
     path: '/',
