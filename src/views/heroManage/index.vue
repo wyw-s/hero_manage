@@ -260,6 +260,7 @@ export default {
       this.$store.dispatch('postAddHero', formData).then(res => {
         if (res.code === 200) {
           this.$tooltip('新增成功')
+          this.newUrlBase64 = ''
           this.initData()
         }
       })
