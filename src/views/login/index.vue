@@ -24,6 +24,9 @@
       <el-checkbox v-model="rememb">记住密码</el-checkbox>
       <el-button @click="onLogin" type="primary">登 录</el-button>
     </el-card>
+    <div class="footer">
+      <a href="http://www.beian.miit.gov.cn/" target="_blank">浙ICP备20028697号</a>
+    </div>
   </div>
 </template>
 
@@ -98,6 +101,7 @@ export default {
       margin-bottom: 16px;
       .el-input__inner {
         background: transparent;
+        color: #DDDDDD;
       }
     }
     .el-button {
@@ -116,6 +120,18 @@ export default {
         cursor: pointer;
         vertical-align: middle;
       }
+    }
+  }
+  .footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 12px;
+    a {
+      color: #ffffff;
+      text-decoration: none;
     }
   }
 }

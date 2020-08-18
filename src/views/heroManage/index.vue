@@ -22,12 +22,12 @@
         :align="item.align"
       >
         <template slot-scope="scope">
-          <img
+          <el-image
             v-if="item.prop === 'images'"
-            class="images"
+            style="width: 80px; height: 80px"
             :src="scope.row[item.prop]"
-            alt=""
-          >
+            :preview-src-list="[scope.row[item.prop]]">
+          </el-image>
           <div v-else>{{ scope.row[item.prop] }}</div>
         </template>
       </el-table-column>
