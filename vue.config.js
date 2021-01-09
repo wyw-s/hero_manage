@@ -1,6 +1,6 @@
 module.exports = {
   // 解决部署后访问空白页的问题；
-  publicPath: '/hero/',
+  publicPath: '/',
   // 输出文件目录 默认为: dist
   outputDir: 'dist',
   // 放置打包生成的静态资源 (js、css、img、fonts) 的目录。该目录相对于 outputDir 。
