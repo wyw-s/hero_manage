@@ -35,7 +35,6 @@ const routes = [
   },
   {
     path: '/photo',
-    name: 'photo',
     component: () => import('@/views/photo')
   }
 ]
