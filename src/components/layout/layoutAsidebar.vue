@@ -52,7 +52,7 @@ export default {
             { id: '2-2', menuName: '新品上市', url: '', children: null }
           ]
         },
-        { id: '3', menuName: '数据管理', url: '', children: null }
+        { id: '3', menuName: '数据管理', url: 'photo', children: null }
       ]
     }
   },
